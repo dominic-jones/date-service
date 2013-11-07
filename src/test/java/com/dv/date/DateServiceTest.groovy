@@ -7,6 +7,8 @@ class DateServiceTest {
 	@Test
 	void test() {
 
-		new DateService().dates()
+		def result = new DateService().dates()
+
+		assert !result.empty
 	}
 }
