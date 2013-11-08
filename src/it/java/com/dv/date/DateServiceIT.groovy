@@ -38,8 +38,7 @@ public class DateServiceIT {
         def url = fromUri(deploymentUrl.toURI())
                 .path('rest')
                 .path('dates')
-                .build(
-        )
+                .build()
 
         def response = new ResteasyClientBuilder()
                 .build()
