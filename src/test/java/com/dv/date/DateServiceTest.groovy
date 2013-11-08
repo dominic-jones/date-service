@@ -7,6 +7,17 @@ import static org.joda.time.format.DateTimeFormat.forPattern
 
 class DateServiceTest {
 
+    DateService service = new DateService()
+
+    @Test
+    void 'Should return dates'() {
+        def rawDate = parse('2010-10-20', forPattern('yyyy-MM-dd'))
+
+        def result = service.dates()
+
+        assert [rawDate] == result
+    }
+
     @Test
     void test() {
 
