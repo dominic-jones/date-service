@@ -7,12 +7,17 @@ import org.jboss.arquillian.test.api.ArquillianResource
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
+import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith
+
+import javax.ws.rs.core.GenericType
 
 import static javax.ws.rs.core.UriBuilder.fromUri
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.INSTANCE
+import static org.joda.time.DateTime.parse
+import static org.joda.time.format.DateTimeFormat.forPattern
 
 @RunWith(Arquillian)
 @RunAsClient
@@ -45,8 +50,8 @@ public class DateServiceIT {
                 .target(url)
                 .request()
                 .get()
-                .readEntity(String)
+                .readEntity(new GenericType<List<DateTime>>() {})
 
-        assert '["10/10/2010"]'.equals(response)
+        assert [parse('2010-10-20', forPattern('yyyy-MM-dd'))] == response
     }
 }
