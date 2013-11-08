@@ -17,6 +17,7 @@ import static javax.ws.rs.core.UriBuilder.fromUri
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.INSTANCE
 import static org.joda.time.DateTime.parse
+import static org.joda.time.DateTimeZone.UTC
 import static org.joda.time.format.DateTimeFormat.forPattern
 
 @RunWith(Arquillian)
@@ -52,6 +53,6 @@ public class DateServiceIT {
                 .get()
                 .readEntity(new GenericType<List<DateTime>>() {})
 
-        assert [parse('2010-10-20', forPattern('yyyy-MM-dd'))] == response
+        assert [parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC)] == response
     }
 }
