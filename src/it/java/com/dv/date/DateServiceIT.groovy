@@ -51,8 +51,8 @@ public class DateServiceIT {
                 .target(url)
                 .request()
                 .get()
-                .readEntity(new GenericType<List<DateTime>>() {})
+                .readEntity(new GenericType<Map<String, DateTime>>() {})
 
-        assert [parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC)] == response
+        assert parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC) == response.UTC
     }
 }

@@ -16,13 +16,17 @@ class DateServiceTest {
 
         def result = service.dates()
 
-        assert [rawDate] == result
+        assert rawDate == result.values().sort { d -> d.zone.ID }.last()
     }
 
     @Test
     void 'Should return timezones'() {
         def result = service.dates()
 
-        assert UTC == result[0].zone
+        assert [
+                'Europe/Berlin',
+                'Europe/London',
+                'UTC',
+        ] == result.values().zone.ID.sort()
     }
 }
