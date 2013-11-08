@@ -4,11 +4,11 @@ import org.junit.Test
 
 class DateServiceTest {
 
-	@Test
-	void test() {
+    @Test
+    void test() {
 
-		def result = new DateService().dates()
+        def result = new DateService().dates()
 
-		assert !result.empty
-	}
+        assert !result.empty
+    }
 }
