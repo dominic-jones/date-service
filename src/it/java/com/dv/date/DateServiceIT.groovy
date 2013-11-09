@@ -1,11 +1,9 @@
 package com.dv.date
 
-import org.apache.ziplock.JarLocation
 import org.jboss.arquillian.container.test.api.Deployment
 import org.jboss.arquillian.container.test.api.RunAsClient
 import org.jboss.arquillian.junit.Arquillian
 import org.jboss.arquillian.test.api.ArquillianResource
-import org.jboss.resteasy.cdi.ResteasyCdiExtension
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
@@ -18,6 +16,7 @@ import javax.ws.rs.core.GenericType
 import static javax.ws.rs.core.UriBuilder.fromUri
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.INSTANCE
+import static org.jboss.shrinkwrap.resolver.api.maven.Maven.resolver
 import static org.joda.time.DateTime.parse
 import static org.joda.time.DateTimeZone.UTC
 import static org.joda.time.format.DateTimeFormat.forPattern
@@ -29,10 +28,17 @@ public class DateServiceIT {
     @Deployment
     static Archive<WebArchive> deployment() {
 
+        def resolver = resolver()
+                .loadPomFromFile('pom.xml')
+                .importCompileAndRuntimeDependencies()
+                .resolve()
+                .withTransitivity()
+                .asFile()
+
         def archive = create(WebArchive, 'date-test.war')
                 .addClass(DateService)
                 .addClass(DateRepository)
-                .addAsLibraries(JarLocation.jarLocation(ResteasyCdiExtension))
+                .addAsLibraries(resolver)
                 .addAsWebInfResource(INSTANCE, 'beans.xml')
                 .addAsWebInfResource('web.xml')
 
