@@ -37,7 +37,7 @@ public class DateServiceIT {
 
         def archive = create(WebArchive, 'date-test.war')
                 .addClass(DateService)
-                .addClass(DateRepository)
+                .addClass(FindDateQuery)
                 .addAsLibraries(resolver)
                 .addAsWebInfResource(INSTANCE, 'beans.xml')
                 .addAsWebInfResource('web.xml')
