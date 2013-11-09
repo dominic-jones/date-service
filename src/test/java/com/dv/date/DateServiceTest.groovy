@@ -1,32 +1,40 @@
 package com.dv.date
 
+import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.runners.MockitoJUnitRunner
 
 import static org.joda.time.DateTime.parse
 import static org.joda.time.DateTimeZone.UTC
 import static org.joda.time.format.DateTimeFormat.forPattern
+import static org.mockito.BDDMockito.given
 
+@RunWith(MockitoJUnitRunner)
 class DateServiceTest {
 
-    DateService service = new DateService()
+    @InjectMocks
+    DateService service
 
-    @Test
-    void 'Should return dates'() {
-        def rawDate = parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC)
+    @Mock
+    DateRepository dateRepository
 
-        def result = service.dates()
+    def dates = [
+            UTC: parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC)
+    ]
 
-        assert rawDate == result.values().sort { d -> d.zone.ID }.last()
+    @Before
+    void setUp() {
+        given(dateRepository.getDates())
+                .willReturn(dates)
     }
 
     @Test
-    void 'Should return timezones'() {
+    void 'Should return dates'() {
         def result = service.dates()
 
-        assert [
-                'Europe/Berlin',
-                'Europe/London',
-                'UTC',
-        ] == result.values().zone.ID.sort()
+        assert dates.UTC == result.UTC
     }
 }
