@@ -122,6 +122,7 @@
             <artifactId>shrinkwrap-resolver-depchain</artifactId>
             <version>2.1.0-alpha-1</version>
             <scope>test</scope>
+            <type>pom</type>
         </dependency>
 
         <dependency>
