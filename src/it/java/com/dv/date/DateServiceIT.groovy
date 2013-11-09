@@ -1,5 +1,6 @@
 package com.dv.date
 
+import com.dv.config.Resources
 import org.jboss.arquillian.container.test.api.Deployment
 import org.jboss.arquillian.container.test.api.RunAsClient
 import org.jboss.arquillian.junit.Arquillian
@@ -28,7 +29,7 @@ public class DateServiceIT {
     @Deployment
     static Archive<WebArchive> deployment() {
 
-        def resolver = resolver()
+        def dependencies = resolver()
                 .loadPomFromFile('pom.xml')
                 .importCompileAndRuntimeDependencies()
                 .resolve()
@@ -37,8 +38,13 @@ public class DateServiceIT {
 
         def archive = create(WebArchive, 'date-test.war')
                 .addClass(DateService)
+                .addClass(DateBootstrap)
                 .addClass(FindDateQuery)
-                .addAsLibraries(resolver)
+                .addClass(Timezone)
+                .addClass(Resources)
+                .addAsLibraries(dependencies)
+                .addAsWebInfResource('persistence.xml', 'classes/META-INF/persistence.xml')
+                .addAsWebInfResource('glassfish-resources.xml', 'glassfish-resources.xml')
                 .addAsWebInfResource(INSTANCE, 'beans.xml')
                 .addAsWebInfResource('web.xml')
 

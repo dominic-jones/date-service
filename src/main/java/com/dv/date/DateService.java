@@ -2,7 +2,7 @@ package com.dv.date;
 
 import org.joda.time.DateTime;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,8 +11,8 @@ import java.util.Map;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+@Stateless
 @Path("dates")
-@ApplicationScoped
 public class DateService {
 
     @Inject
