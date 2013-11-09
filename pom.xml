@@ -61,7 +61,7 @@
             <version>${org.jboss.resteasy.version}</version>
         </dependency>
 
-
+        <!--Test-->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
@@ -69,7 +69,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Test-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
