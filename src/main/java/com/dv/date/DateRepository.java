@@ -2,6 +2,7 @@ package com.dv.date;
 
 import org.joda.time.DateTime;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.joda.time.DateTimeZone.UTC;
 import static org.joda.time.DateTimeZone.forID;
 
+@ApplicationScoped
 public class DateRepository {
 
     Map<String, DateTime> getDates() {

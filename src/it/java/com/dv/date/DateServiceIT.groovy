@@ -29,7 +29,8 @@ public class DateServiceIT {
 
         def archive = create(WebArchive, 'date-test.war')
                 .addClass(DateService)
-                .addAsManifestResource(INSTANCE, 'beans.xml')
+                .addClass(DateRepository)
+                .addAsWebInfResource(INSTANCE, 'beans.xml')
                 .addAsManifestResource('context.xml')
                 .addAsWebInfResource('web.xml')
 
