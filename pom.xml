@@ -121,6 +121,12 @@
             <artifactId>ziplock</artifactId>
             <version>1.5.2</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.openejb</groupId>
+                    <artifactId>javaee-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
