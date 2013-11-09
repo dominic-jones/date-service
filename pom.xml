@@ -61,6 +61,25 @@
             <version>4.3.0.Beta5</version>
         </dependency>
 
+        <!--JaxRS-->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-cdi</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+        </dependency>
+
         <!--Spec-->
         <dependency>
             <groupId>javax.ejb</groupId>
@@ -81,24 +100,6 @@
             <artifactId>javax.inject</artifactId>
             <version>1</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${org.jboss.resteasy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-            <version>${org.jboss.resteasy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-cdi</artifactId>
-            <version>${org.jboss.resteasy.version}</version>
         </dependency>
 
         <!--Test-->
