@@ -3,6 +3,7 @@ package com.dv.date;
 import org.joda.time.DateTime;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import static org.joda.time.DateTimeZone.UTC;
 import static org.joda.time.DateTimeZone.forID;
 
 @ApplicationScoped
-public class DateRepository {
+public class FindDateQuery {
 
     Map<String, DateTime> getDates() {
 

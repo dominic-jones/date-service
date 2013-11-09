@@ -19,7 +19,7 @@ class DateServiceTest {
     DateService service
 
     @Mock
-    DateRepository dateRepository
+    FindDateQuery findDateQuery
 
     def dates = [
             UTC: parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC)
@@ -27,7 +27,7 @@ class DateServiceTest {
 
     @Before
     void setUp() {
-        given(dateRepository.getDates())
+        given(findDateQuery.execute())
                 .willReturn(dates)
     }
 

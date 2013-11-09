@@ -16,13 +16,13 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 public class DateService {
 
     @Inject
-    DateRepository dateRepository;
+    FindDateQuery findDateQuery;
 
     @GET
     @Produces(APPLICATION_JSON)
     public Map<String, DateTime> dates() {
 
-        return dateRepository.getDates();
+        return findDateQuery.execute();
     }
 
 }
