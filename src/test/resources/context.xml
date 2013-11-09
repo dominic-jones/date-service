@@ -1,5 +1,0 @@
-<Context antiResourceLocking="true">
-    <Valve className="org.apache.catalina.valves.AccessLogValve"
-           directory="logs" prefix="localhost_access." suffix=".log"
-           pattern="common" resolveHosts="false"/>
-</Context>

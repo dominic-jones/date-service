@@ -34,14 +34,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>15.0</version>
-            <classifier>cdi1.0</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>1.1-20130918</version>
+            <version>13.0</version>
         </dependency>
 
         <dependency>
@@ -57,9 +50,17 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.1-20130918</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -73,7 +74,7 @@
             <artifactId>resteasy-jackson-provider</artifactId>
             <version>${org.jboss.resteasy.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-cdi</artifactId>
@@ -205,7 +206,7 @@
 
     <profiles>
         <profile>
-            <id>arquillian-tomcat-embedded</id>
+            <id>arquillian-glassfish-embedded</id>
 
             <activation>
                 <!--A workaround for 'always on', as activateByDefault turns off if other profiles are activated-->
@@ -214,47 +215,18 @@
                 </property>
             </activation>
 
-            <properties>
-                <version.org.apache.tomcat>7.0.32</version.org.apache.tomcat>
-            </properties>
-
             <dependencies>
                 <dependency>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                    <artifactId>tomcat-embed-core</artifactId>
-                    <version>${version.org.apache.tomcat}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                    <artifactId>tomcat-embed-jasper</artifactId>
-                    <version>${version.org.apache.tomcat}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                    <artifactId>tomcat-embed-logging-juli</artifactId>
-                    <version>${version.org.apache.tomcat}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
-                    <artifactId>arquillian-tomcat-embedded-7</artifactId>
-                    <version>1.0.0.CR5</version>
+                    <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+                    <version>1.0.0.CR4</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
-                    <groupId>org.jboss.arquillian.protocol</groupId>
-                    <artifactId>arquillian-protocol-servlet</artifactId>
-                    <scope>test</scope>
-                </dependency>
-
-                <!-- Weld servlet for testing CDI injections -->
-                <dependency>
-                    <groupId>org.jboss.weld.servlet</groupId>
-                    <artifactId>weld-servlet</artifactId>
-                    <version>2.1.0.Final</version>
-                    <scope>test</scope>
+                    <groupId>org.glassfish.main.extras</groupId>
+                    <artifactId>glassfish-embedded-all</artifactId>
+                    <version>4.0</version>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>

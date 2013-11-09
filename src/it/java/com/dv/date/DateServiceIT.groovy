@@ -1,9 +1,11 @@
 package com.dv.date
 
+import org.apache.ziplock.JarLocation
 import org.jboss.arquillian.container.test.api.Deployment
 import org.jboss.arquillian.container.test.api.RunAsClient
 import org.jboss.arquillian.junit.Arquillian
 import org.jboss.arquillian.test.api.ArquillianResource
+import org.jboss.resteasy.cdi.ResteasyCdiExtension
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
@@ -30,8 +32,8 @@ public class DateServiceIT {
         def archive = create(WebArchive, 'date-test.war')
                 .addClass(DateService)
                 .addClass(DateRepository)
+                .addAsLibraries(JarLocation.jarLocation(ResteasyCdiExtension))
                 .addAsWebInfResource(INSTANCE, 'beans.xml')
-                .addAsManifestResource('context.xml')
                 .addAsWebInfResource('web.xml')
 
         archive
