@@ -15,6 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <org.hibernate.orm.version>4.3.0.Beta5</org.hibernate.orm.version>
         <org.jboss.resteasy.version>3.0.5.Final</org.jboss.resteasy.version>
     </properties>
 
@@ -58,13 +59,13 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.0.Beta5</version>
+            <version>${org.hibernate.orm.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.0.Beta5</version>
+            <version>${org.hibernate.orm.version}</version>
         </dependency>
 
         <!--JaxRS-->
@@ -87,7 +88,6 @@
         </dependency>
 
         <!--Spec-->
-
         <dependency>
             <groupId>javax.ejb</groupId>
             <artifactId>javax.ejb-api</artifactId>
@@ -151,19 +151,6 @@
             <version>2.1.0-alpha-1</version>
             <scope>test</scope>
             <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>ziplock</artifactId>
-            <version>1.5.2</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.openejb</groupId>
-                    <artifactId>javaee-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
