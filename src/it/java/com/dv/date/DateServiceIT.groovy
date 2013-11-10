@@ -10,6 +10,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -18,6 +19,7 @@ import static org.jboss.shrinkwrap.api.ShrinkWrap.create
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.INSTANCE
 import static org.jboss.shrinkwrap.resolver.api.maven.Maven.resolver
 import static org.joda.time.DateTimeZone.UTC
+import static org.joda.time.DateTimeZone.forID
 import static org.joda.time.DateTimeZone.forID
 
 /**
@@ -58,7 +60,7 @@ public class DateServiceIT {
     URL deploymentUrl
 
     @Test
-    public void 'Given source time, should return the same time in UTC'() {
+    void 'Given source time, should return the same time in UTC'() {
         def sourceTime = new DateTime(UTC)
                 .withDate(2010, 10, 20)
                 .withTime(0, 0, 0, 0)
@@ -76,5 +78,26 @@ public class DateServiceIT {
                 .readEntity(DatesModel)
 
         assert sourceTime == response.dates.UTC
+    }
+
+    @Test
+    void 'Given source time, should return the same time in London zone'() {
+        def sourceTime = new DateTime(UTC)
+                .withDate(2010, 10, 20)
+                .withTime(0, 0, 0, 0)
+        def url = fromUri(deploymentUrl.toURI())
+                .path('rest')
+                .path('dates')
+                .path(sourceTime.toString())
+                .build()
+
+        def response = new ResteasyClientBuilder()
+                .build()
+                .target(url)
+                .request()
+                .get()
+                .readEntity(DatesModel)
+
+        assert sourceTime.withZone(forID('Europe/London')) == response.dates.'Europe/London'
     }
 }
