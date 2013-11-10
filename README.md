@@ -11,7 +11,6 @@ This module contains the following examples:
 * JodaTime libraries in place of existing java.util.Date
 * JPA Entity Model / Database configuration
 * Startup/Singleton EJB providing basic datase bootstrap
-
 * Arquillian for integration tests
 * Groovy/JUnit for testing
 
