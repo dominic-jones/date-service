@@ -22,10 +22,10 @@ public class DatesModel {
 
     }
 
-    public DatesModel(DateTime sourceDate,
+    public DatesModel(DateTime sourceTime,
                       Iterable<Location> locations) {
 
-        Iterable<DateTime> iDates = transform(locations, toDateTime(sourceDate));
+        Iterable<DateTime> iDates = transform(locations, toDateTime(sourceTime));
 
         dates = uniqueIndex(iDates, new Function<DateTime, String>() {
             @Nullable
