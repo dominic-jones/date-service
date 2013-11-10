@@ -7,9 +7,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.runners.MockitoJUnitRunner
 
-import static org.joda.time.DateTime.parse
 import static org.joda.time.DateTimeZone.UTC
-import static org.joda.time.format.DateTimeFormat.forPattern
 import static org.mockito.BDDMockito.given
 
 @RunWith(MockitoJUnitRunner)
@@ -22,7 +20,7 @@ class DateServiceTest {
     FindDateQuery findDateQuery
 
     def dates = [
-            UTC: parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC)
+            new Timezone('UTC')
     ]
 
     @Before
@@ -35,6 +33,6 @@ class DateServiceTest {
     void 'Should return dates'() {
         def result = service.dates()
 
-        assert dates.UTC == result.UTC
+        assert UTC == result.UTC.zone
     }
 }
