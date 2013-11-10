@@ -33,6 +33,6 @@ class DateServiceTest {
     void 'Should return dates'() {
         def result = service.dates()
 
-        assert UTC == result.UTC.zone
+        assert UTC == result.dates.UTC.zone
     }
 }

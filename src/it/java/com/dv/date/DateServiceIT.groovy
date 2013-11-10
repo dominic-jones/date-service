@@ -8,11 +8,8 @@ import org.jboss.arquillian.test.api.ArquillianResource
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
-import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import javax.ws.rs.core.GenericType
 
 import static javax.ws.rs.core.UriBuilder.fromUri
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create
@@ -66,8 +63,8 @@ public class DateServiceIT {
                 .target(url)
                 .request()
                 .get()
-                .readEntity(new GenericType<Map<String, DateTime>>() {})
+                .readEntity(DatesModel)
 
-        assert parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC) == response.UTC
+        assert parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC) == response.dates.UTC
     }
 }

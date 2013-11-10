@@ -20,12 +20,12 @@ public class DateService {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public DatesVO dates() {
+    public DatesModel dates() {
 
         final DateTime sourceDate = new DateTime(UTC)
                 .withDate(2010, 10, 20)
                 .withTime(0, 0, 0, 0);
 
-        return new DatesVO(sourceDate, findLocationsQuery.execute());
+        return new DatesModel(sourceDate, findLocationsQuery.execute());
     }
 }
