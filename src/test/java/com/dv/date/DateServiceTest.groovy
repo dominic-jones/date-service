@@ -17,15 +17,15 @@ class DateServiceTest {
     DateService service
 
     @Mock
-    FindDateQuery findDateQuery
+    FindLocationsQuery query
 
     def dates = [
-            new Timezone('UTC')
+            new Location('UTC')
     ]
 
     @Before
     void setUp() {
-        given(findDateQuery.execute())
+        given(query.execute())
                 .willReturn(dates)
     }
 

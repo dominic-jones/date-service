@@ -4,17 +4,17 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class FindDateQuery {
+public class FindLocationsQuery {
 
     @Inject
     private EntityManager em;
 
-    Iterable<Timezone> execute() {
+    Iterable<Location> execute() {
 
-        CriteriaQuery<Timezone> query = em.getCriteriaBuilder()
-                .createQuery(Timezone.class);
+        CriteriaQuery<Location> query = em.getCriteriaBuilder()
+                .createQuery(Location.class);
 
-        query.from(Timezone.class);
+        query.from(Location.class);
 
         return em.createQuery(query)
                 .getResultList();

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import static org.joda.time.DateTimeZone.forID;
 
 @Entity
-public class Timezone {
+public class Location {
 
     @Id
     @GenericGenerator(name = "table-hilo-generator", strategy = "org.hibernate.id.TableHiLoGenerator")
@@ -21,22 +21,22 @@ public class Timezone {
 
     private String timezone;
 
-    protected Timezone() {
+    protected Location() {
 
     }
 
-    public Timezone(final String timezone) {
+    public Location(final String timezone) {
 
         this.timezone = timezone;
     }
 
-    public static Function<Timezone, DateTime> toDateTime(final DateTime sourceDate) {
+    public static Function<Location, DateTime> toDateTime(final DateTime sourceDate) {
 
-        return new Function<Timezone, DateTime>() {
+        return new Function<Location, DateTime>() {
             @Override
-            public DateTime apply(@Nullable Timezone timezone) {
+            public DateTime apply(@Nullable Location location) {
 
-                return sourceDate.withZone(forID(timezone.getTimezone()));
+                return sourceDate.withZone(forID(location.getTimezone()));
             }
         };
     }

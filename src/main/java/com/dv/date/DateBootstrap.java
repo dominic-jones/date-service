@@ -16,9 +16,9 @@ public class DateBootstrap {
     @PostConstruct
     void bootstrap() {
 
-        entityManager.persist(new Timezone("UTC"));
-        entityManager.persist(new Timezone("Europe/London"));
-        entityManager.persist(new Timezone("Europe/Berlin"));
+        entityManager.persist(new Location("UTC"));
+        entityManager.persist(new Location("Europe/London"));
+        entityManager.persist(new Location("Europe/Berlin"));
     }
 
 }
