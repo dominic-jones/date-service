@@ -8,6 +8,7 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+//TODO 2013-11-10 Dom - Should be a test-only class
 @Singleton
 @Startup
 public class DateBootstrap {

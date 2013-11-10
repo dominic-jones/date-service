@@ -6,12 +6,16 @@ import org.joda.time.DateTime;
 import javax.annotation.Nullable;
 import java.util.Map;
 
+import static com.dv.date.impl.Location.toDateTime;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Maps.uniqueIndex;
 
 /**
  * View model for displaying dates. The intent for this is to provide one place to collect all the information
  * required to display in our specific dates view, without revealing our whole domain model.
+ *
+ * One direction would be for this is to map to exactly one View if using a Java view engine (JSF et al). However for
+ * now this just maps (using default conventions) to json.
  */
 public class DatesModel {
 
@@ -24,7 +28,7 @@ public class DatesModel {
     public DatesModel(DateTime sourceTime,
                       Iterable<Location> locations) {
 
-        Iterable<DateTime> iDates = transform(locations, Location.toDateTime(sourceTime));
+        Iterable<DateTime> iDates = transform(locations, toDateTime(sourceTime));
 
         dates = uniqueIndex(iDates, new Function<DateTime, String>() {
             @Nullable

@@ -10,6 +10,18 @@ import javax.ws.rs.Produces;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.joda.time.DateTime.parse;
 
+/**
+ * Simple EJB/JAX-RS service.
+ *
+ * This is not pattern'd as I have historically done, but tries to display some of my preferred thinking.
+ *
+ * Firstly, I prefer a lean, thin controller. Following SRP, I prefer a controller to be responsible for the service
+ * wiring. Sourcing from /dates, accepting JSON, and so forth. Other responsibilities have been handed out to the
+ * query object and the view model object.
+ *
+ * For more complicated cases, I would prefer to relocate the method logic (currently only findLocationsQuery) to
+ * another handler class for better SRP.
+ */
 @Stateless
 @Path("/dates")
 public class DateService {

@@ -157,6 +157,7 @@
     <build>
 
         <plugins>
+            <!--Adding integration tests source directory-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -177,11 +178,13 @@
                 </executions>
             </plugin>
 
+            <!--Ensuring recent version of surefire-->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12</version>
             </plugin>
 
+            <!--failsafe is the integration tests plugin to run the Arquillian separately-->
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.6</version>
@@ -202,6 +205,7 @@
                 <extensions>true</extensions>
             </plugin>
 
+            <!--Groovy compiler-->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
@@ -229,6 +233,8 @@
 
     <profiles>
         <profile>
+            <!--As there is only one container being used, these settings could be used above.
+            A profile though, allows for testing against multiple containers. -->
             <id>arquillian-glassfish-embedded</id>
 
             <activation>
