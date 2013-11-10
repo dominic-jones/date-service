@@ -9,6 +9,7 @@ import org.jboss.arquillian.test.api.ArquillianResource
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
+import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -54,9 +55,13 @@ public class DateServiceIT {
 
     @Test
     public void test() {
+        def sourceTime = new DateTime(UTC)
+                .withDate(2010, 10, 20)
+                .withTime(0, 0, 0, 0)
         def url = fromUri(deploymentUrl.toURI())
                 .path('rest')
                 .path('dates')
+                .path(sourceTime.toString())
                 .build()
 
         def response = new ResteasyClientBuilder()

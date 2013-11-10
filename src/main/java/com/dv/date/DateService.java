@@ -1,15 +1,14 @@
 package com.dv.date;
 
-import org.joda.time.DateTime;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static org.joda.time.DateTimeZone.UTC;
+import static org.joda.time.DateTime.parse;
 
 @Stateless
 @Path("/dates")
@@ -20,12 +19,9 @@ public class DateService {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public DatesModel dates() {
+    @Path("{sourceTime}")
+    public DatesModel dates(@PathParam("sourceTime") String sourceTime) {
 
-        final DateTime sourceDate = new DateTime(UTC)
-                .withDate(2010, 10, 20)
-                .withTime(0, 0, 0, 0);
-
-        return new DatesModel(sourceDate, findLocationsQuery.execute());
+        return new DatesModel(parse(sourceTime), findLocationsQuery.execute());
     }
 }
