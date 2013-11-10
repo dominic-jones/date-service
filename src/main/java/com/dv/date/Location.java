@@ -36,6 +36,7 @@ public class Location {
             @Override
             public DateTime apply(@Nullable Location location) {
 
+                assert location != null;
                 return sourceDate.withZone(forID(location.getTimezone()));
             }
         };
