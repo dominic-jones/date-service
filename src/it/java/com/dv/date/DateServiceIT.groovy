@@ -17,10 +17,14 @@ import static javax.ws.rs.core.UriBuilder.fromUri
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.INSTANCE
 import static org.jboss.shrinkwrap.resolver.api.maven.Maven.resolver
-import static org.joda.time.DateTime.parse
 import static org.joda.time.DateTimeZone.UTC
-import static org.joda.time.format.DateTimeFormat.forPattern
+import static org.joda.time.DateTimeZone.forID
 
+/**
+ * Sample integration test using groovy and Arquillian. The JAXRS service is loaded and run n a WAR on an embedded
+ * Glassfish instance. This test runs as a client from outside of the container,
+ * using JAXRS Client libraries to perform an HTTP GET to the api url.
+ */
 @RunWith(Arquillian)
 @RunAsClient
 public class DateServiceIT {
@@ -54,7 +58,7 @@ public class DateServiceIT {
     URL deploymentUrl
 
     @Test
-    public void test() {
+    public void 'Given source time, should return the same time in UTC'() {
         def sourceTime = new DateTime(UTC)
                 .withDate(2010, 10, 20)
                 .withTime(0, 0, 0, 0)
@@ -71,6 +75,6 @@ public class DateServiceIT {
                 .get()
                 .readEntity(DatesModel)
 
-        assert parse('2010-10-20', forPattern('yyyy-MM-dd')).withZoneRetainFields(UTC) == response.dates.UTC
+        assert sourceTime == response.dates.UTC
     }
 }
