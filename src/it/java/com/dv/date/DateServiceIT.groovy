@@ -1,5 +1,6 @@
 package com.dv.date
 
+import com.dv.bootstrap.DateBootstrap
 import com.dv.config.Resources
 import org.jboss.arquillian.container.test.api.Deployment
 import org.jboss.arquillian.container.test.api.RunAsClient
