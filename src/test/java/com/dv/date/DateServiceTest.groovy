@@ -10,6 +10,9 @@ import org.mockito.runners.MockitoJUnitRunner
 import static org.joda.time.DateTimeZone.UTC
 import static org.mockito.BDDMockito.given
 
+/**
+ * Presently, this test does not grant much value. It stands as a basic example of a groovy/mockito test-case.
+ */
 @RunWith(MockitoJUnitRunner)
 class DateServiceTest {
 

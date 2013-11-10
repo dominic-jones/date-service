@@ -10,6 +10,10 @@ import static com.dv.date.Location.toDateTime;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Maps.uniqueIndex;
 
+/**
+ * View model for displaying dates. The intent for this is to provide one place to collect all the information
+ * required to display in our specific dates view, without revealing our whole domain model.
+ */
 public class DatesModel {
 
     private Map<String, DateTime> dates;
