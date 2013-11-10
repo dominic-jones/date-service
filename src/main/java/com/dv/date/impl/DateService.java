@@ -1,4 +1,4 @@
-package com.dv.date;
+package com.dv.date.impl;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

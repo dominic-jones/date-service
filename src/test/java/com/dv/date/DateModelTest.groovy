@@ -1,5 +1,7 @@
 package com.dv.date
 
+import com.dv.date.impl.DatesModel
+import com.dv.date.impl.Location
 import org.joda.time.DateTime
 import org.junit.Test
 import org.junit.runner.RunWith

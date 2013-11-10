@@ -1,6 +1,6 @@
-package com.dv.bootstrap;
+package com.dv.date.bootstrap;
 
-import com.dv.date.Location;
+import com.dv.date.impl.Location;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;

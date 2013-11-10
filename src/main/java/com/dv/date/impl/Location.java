@@ -1,4 +1,4 @@
-package com.dv.date;
+package com.dv.date.impl;
 
 import com.google.common.base.Function;
 import org.hibernate.annotations.GenericGenerator;

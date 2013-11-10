@@ -1,4 +1,4 @@
-package com.dv.config;
+package com.dv.date.config;
 
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
