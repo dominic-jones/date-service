@@ -46,16 +46,7 @@ public class DateServiceIT {
                 .asFile()
 
         def archive = create(WebArchive, 'date-test.war')
-                .addClasses(CreateDateHandler,
-                            DateService,
-                            DateBootstrap,
-                            DatesModel,
-                            FindLocationsQuery,
-                            Iso8601DateTimeDeserializer,
-                            Iso8601JodaModule,
-                            JacksonConfig,
-                            Location,
-                            Resources)
+                .addPackages(true, 'com.dv.date')
                 .addAsLibraries(dependencies)
                 .addAsWebInfResource('persistence.xml', 'classes/META-INF/persistence.xml')
                 .addAsWebInfResource('glassfish-resources.xml', 'glassfish-resources.xml')
@@ -110,7 +101,7 @@ public class DateServiceIT {
     }
 
     @Test
-    void 'Given a new time, when POST, should add a new timezone'() {
+    void 'Given a new location, should add a new timezone'() {
         def url = fromUri(deploymentUrl.toURI())
                 .path('rest')
                 .path('dates')
