@@ -14,11 +14,9 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
 import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import static com.google.common.base.Charsets.UTF_8
 import static javax.ws.rs.client.Entity.entity
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE
 import static javax.ws.rs.core.UriBuilder.fromUri
@@ -84,13 +82,6 @@ public class DateServiceIT {
                 .path(sourceTime.toString())
                 .build()
 
-        def response2 = builder.build()
-                .target(url)
-                .request()
-                .get()
-                .readEntity(String)
-        println response2
-
         def response = builder.build()
                 .target(url)
                 .request()
@@ -139,7 +130,7 @@ public class DateServiceIT {
                 .target(getUrl)
                 .request()
                 .get(DatesModel)
-        assert sourceTime.withZone(forID(tokyo)) == response.dates.'Asia/Tokyo'
+        assert sourceTime.withZone(forID(tokyo)).toLocalDateTime() == response.dates.'Asia/Tokyo'.toLocalDateTime()
     }
 
 }

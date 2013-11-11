@@ -13,6 +13,10 @@ import java.io.IOException;
 
 /**
  * Adapted from com.fasterxml.jackson.datatype.joda.deser.DateTimeDeserializer.
+ *
+ * Found that the provided DateTimeDeserializer does not handle Map values by default, nor allows being assigned
+ * to a Map using @JsonDeserialize(contentUsing=). This class corrects that.
+ * TODO 2013/11/11 Dom - Requires further investigation.
  */
 public class Iso8601DateTimeDeserializer
         extends StdScalarDeserializer<DateTime> {
@@ -36,8 +40,7 @@ public class Iso8601DateTimeDeserializer
             if (str.length() == 0) {
                 return null;
             }
-            DateTime dateTime = DateTime.parse(str);
-            return dateTime;
+            return DateTime.parse(str);
         }
         throw ctxt.mappingException(getValueClass());
     }
