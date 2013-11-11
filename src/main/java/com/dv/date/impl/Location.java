@@ -30,14 +30,14 @@ public class Location {
         this.timezone = timezone;
     }
 
-    public static Function<Location, DateTime> toDateTime(final DateTime sourceDate) {
+    public static Function<Location, DateTime> toDateTime(final DateTime sourceTime) {
 
         return new Function<Location, DateTime>() {
             @Override
             public DateTime apply(@Nullable Location location) {
 
                 assert location != null;
-                return sourceDate.withZone(forID(location.getTimezone()));
+                return sourceTime.withZone(forID(location.getTimezone()));
             }
         };
     }

@@ -1,11 +1,11 @@
 package com.dv.date
 
 import com.dv.date.bootstrap.DateBootstrap
+import com.dv.date.config.Iso8601DateTimeDeserializer
+import com.dv.date.config.Iso8601JodaModule
+import com.dv.date.config.JacksonConfig
 import com.dv.date.config.Resources
-import com.dv.date.impl.DateService
-import com.dv.date.impl.DatesModel
-import com.dv.date.impl.FindLocationsQuery
-import com.dv.date.impl.Location
+import com.dv.date.impl.*
 import org.jboss.arquillian.container.test.api.Deployment
 import org.jboss.arquillian.container.test.api.RunAsClient
 import org.jboss.arquillian.junit.Arquillian
@@ -14,9 +14,13 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder
 import org.jboss.shrinkwrap.api.Archive
 import org.jboss.shrinkwrap.api.spec.WebArchive
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import org.junit.Test
 import org.junit.runner.RunWith
 
+import static com.google.common.base.Charsets.UTF_8
+import static javax.ws.rs.client.Entity.entity
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE
 import static javax.ws.rs.core.UriBuilder.fromUri
 import static org.jboss.shrinkwrap.api.ShrinkWrap.create
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.INSTANCE
@@ -44,11 +48,16 @@ public class DateServiceIT {
                 .asFile()
 
         def archive = create(WebArchive, 'date-test.war')
-                .addClass(DateService)
-                .addClass(DateBootstrap)
-                .addClass(FindLocationsQuery)
-                .addClass(Location)
-                .addClass(Resources)
+                .addClasses(CreateDateHandler,
+                            DateService,
+                            DateBootstrap,
+                            DatesModel,
+                            FindLocationsQuery,
+                            Iso8601DateTimeDeserializer,
+                            Iso8601JodaModule,
+                            JacksonConfig,
+                            Location,
+                            Resources)
                 .addAsLibraries(dependencies)
                 .addAsWebInfResource('persistence.xml', 'classes/META-INF/persistence.xml')
                 .addAsWebInfResource('glassfish-resources.xml', 'glassfish-resources.xml')
@@ -61,45 +70,76 @@ public class DateServiceIT {
     @ArquillianResource
     URL deploymentUrl
 
+    def sourceTime = new DateTime(UTC)
+            .withDate(2010, 10, 20)
+            .withTime(0, 0, 0, 0)
+    def builder = new ResteasyClientBuilder()
+    def tokyo = 'Asia/Tokyo'
+
     @Test
     void 'Given source time, should return the same time in UTC'() {
-        def sourceTime = new DateTime(UTC)
-                .withDate(2010, 10, 20)
-                .withTime(0, 0, 0, 0)
         def url = fromUri(deploymentUrl.toURI())
                 .path('rest')
                 .path('dates')
                 .path(sourceTime.toString())
                 .build()
 
-        def response = new ResteasyClientBuilder()
-                .build()
+        def response2 = builder.build()
+                .target(url)
+                .request()
+                .get()
+                .readEntity(String)
+        println response2
+
+        def response = builder.build()
                 .target(url)
                 .request()
                 .get()
                 .readEntity(DatesModel)
 
-        assert sourceTime == response.dates.UTC
+        assert sourceTime.toLocalDateTime() == response.dates.UTC.toLocalDateTime()
     }
 
     @Test
     void 'Given source time, should return the same time in London zone'() {
-        def sourceTime = new DateTime(UTC)
-                .withDate(2010, 10, 20)
-                .withTime(0, 0, 0, 0)
         def url = fromUri(deploymentUrl.toURI())
                 .path('rest')
                 .path('dates')
                 .path(sourceTime.toString())
                 .build()
 
-        def response = new ResteasyClientBuilder()
+        def response = builder
                 .build()
                 .target(url)
                 .request()
                 .get()
                 .readEntity(DatesModel)
 
-        assert sourceTime.withZone(forID('Europe/London')) == response.dates.'Europe/London'
+        assert sourceTime.withZone(forID('Europe/London')).toLocalDateTime() == response.dates.'Europe/London'.toLocalDateTime()
     }
+
+    @Test
+    void 'Given a new time, when POST, should add a new timezone'() {
+        def url = fromUri(deploymentUrl.toURI())
+                .path('rest')
+                .path('dates')
+                .build()
+
+        builder.build()
+                .target(url)
+                .request()
+                .post(entity(tokyo, APPLICATION_JSON_TYPE))
+
+        def getUrl = fromUri(deploymentUrl.toURI())
+                .path('rest')
+                .path('dates')
+                .path(sourceTime.toString())
+                .build()
+        def response = builder.build()
+                .target(getUrl)
+                .request()
+                .get(DatesModel)
+        assert sourceTime.withZone(forID(tokyo)) == response.dates.'Asia/Tokyo'
+    }
+
 }

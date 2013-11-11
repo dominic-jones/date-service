@@ -15,6 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <com.fasterxml.jackson.version>2.2.3</com.fasterxml.jackson.version>
         <org.hibernate.orm.version>4.3.0.Beta5</org.hibernate.orm.version>
         <org.jboss.resteasy.version>3.0.5.Final</org.jboss.resteasy.version>
     </properties>
@@ -51,12 +52,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${org.hibernate.orm.version}</version>
@@ -77,14 +72,34 @@
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
+            <artifactId>resteasy-cdi</artifactId>
+            <version>${org.jboss.resteasy.version}</version>
+        </dependency>
+
+        <!--Jackson-->
+        <!--RestEasy is not currently (2013/11/11) compatible with Jackson >= 2.3.0-->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
             <version>${org.jboss.resteasy.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-cdi</artifactId>
-            <version>${org.jboss.resteasy.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
         </dependency>
 
         <!--Spec-->
