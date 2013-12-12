@@ -1,10 +1,5 @@
 package com.dv.date
 
-import com.dv.date.bootstrap.DateBootstrap
-import com.dv.date.config.Iso8601DateTimeDeserializer
-import com.dv.date.config.Iso8601JodaModule
-import com.dv.date.config.JacksonConfig
-import com.dv.date.config.Resources
 import com.dv.date.impl.*
 import org.jboss.arquillian.container.test.api.Deployment
 import org.jboss.arquillian.container.test.api.RunAsClient

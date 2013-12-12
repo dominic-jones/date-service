@@ -9,12 +9,17 @@ import javax.persistence.criteria.CriteriaQuery;
  * pattern on top of it feels like unnecessary indirection. However code can be refactored for better SRP,
  * so the Query has been located in its own object.
  */
-public class FindLocationsQuery {
+public class LocationRepository {
 
     @Inject
     private EntityManager em;
 
-    Iterable<Location> execute() {
+    void createLocation(String location) {
+
+        em.persist(new Location(location));
+    }
+
+    Iterable<Location> findLocation() {
 
         CriteriaQuery<Location> query = em.getCriteriaBuilder()
                 .createQuery(Location.class);

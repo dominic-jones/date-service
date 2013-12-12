@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 //TODO 2013-11-10 Dom - Should be a test-only class
 @Singleton
 @Startup
-public class DateBootstrap {
+public class Bootstrap {
 
     @PersistenceContext
     private EntityManager entityManager;
